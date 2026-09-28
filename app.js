@@ -249,7 +249,7 @@
     document.title = `${t('identity.fullName')} | ${title}`;
   }
 
-  function setLanguage(value, save = true) {
+  function setLanguage(value) {
     language = value === 'zh' ? 'zh' : 'en';
     root.lang = language === 'zh' ? 'zh-CN' : 'en';
     $$('[data-i18n]').forEach(element => { element.textContent = t(element.dataset.i18n); });
@@ -271,9 +271,8 @@
     updateThemeLabels();
     updateHomeButton();
     updatePageTitle();
-    if (save) { try { localStorage.setItem('zorya-language', language); } catch { /* Language switching also works without storage. */ } }
   }
-  try { setLanguage(localStorage.getItem('zorya-language') || 'en', false); } catch { setLanguage('en', false); }
+  setLanguage('en');
   $$('[data-language]').forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.language)));
 
   async function route(hash, { initial = false, focus = false, restore = false } = {}) {

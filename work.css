@@ -8,7 +8,7 @@
 .featured-track::-webkit-scrollbar{display:none}
 .featured-track.is-dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
 .featured-card{display:block;position:relative;flex:0 0 var(--slide-width);width:var(--slide-width);scroll-snap-align:center;scroll-margin:0;user-select:none;-webkit-user-drag:none;outline-offset:8px}
-.featured-cover{display:block;width:100%;aspect-ratio:1;border-radius:20px;background:var(--project-color);object-fit:cover;transform:translateY(var(--arc-y,0px)) rotate(var(--arc-rotation,0deg));transform-origin:50% 50%;will-change:transform}
+.featured-cover{display:block;width:100%;aspect-ratio:1;border-radius:var(--square-card-radius);background:transparent;object-fit:cover;transform:translateY(var(--arc-y,0px)) rotate(var(--arc-rotation,0deg));transform-origin:50% 50%;will-change:transform}
 .featured-caption{height:142px;padding-top:20px;text-align:center;opacity:var(--caption-opacity,0);transition:opacity .15s;transform:translateY(var(--arc-y,0px))}
 .featured-name{display:inline-block;max-width:100%;padding:8px 23px;border-radius:24px;background:var(--control);font:700 14px/1.2 'Barlow Condensed',sans-serif;vertical-align:top;color:#191919}
 .featured-category{font:300 10px/1.5 Inter,Arial,sans-serif;color:#191919;margin:10px auto 0}
@@ -23,7 +23,7 @@ html[data-theme=pink] .featured-summary{color:#191919}
 .work-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));column-gap:56px;row-gap:98px;max-width:1030px;margin:70px auto 0}
 .more-card{grid-column:span 2;display:block;min-width:0;max-width:252px;width:100%;justify-self:center}
 .more-card.last-pair-first{grid-column:2/span 2}.more-card.last-pair-second{grid-column:4/span 2}.more-card.last-single{grid-column:3/span 2}
-.more-cover{position:relative;display:block;width:100%;aspect-ratio:1;object-fit:cover;background:var(--project-color);border-radius:19px;box-shadow:0 22px 28px -12px #00000032;transition:transform .45s var(--ease),box-shadow .45s var(--ease);user-select:none;-webkit-user-drag:none}
+.more-cover{position:relative;display:block;width:100%;aspect-ratio:1;object-fit:cover;background:transparent;border-radius:var(--square-card-radius);box-shadow:0 22px 28px -12px #00000032;transition:transform .45s var(--ease),box-shadow .45s var(--ease);user-select:none;-webkit-user-drag:none}
 .more-card:hover .more-cover{transform:translateY(-7px) rotate(-2deg);box-shadow:0 29px 35px -12px #00000036}
 .more-card:nth-child(even):hover .more-cover{transform:translateY(-7px) rotate(2deg)}
 .more-caption{padding-top:22px}.more-name{font-size:17px;line-height:1.45}.more-meta{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-top:8px;color:var(--muted);font-size:11px;line-height:1.5}.more-category{min-width:0}.more-year{font-variant-numeric:tabular-nums;flex-shrink:0}
@@ -35,3 +35,4 @@ html[lang=zh-CN] .featured-summary{font:300 9px/1.55 var(--font-zh)}
 @media(max-width:850px){.featured-gallery{--slide-width:300px;--slide-gap:100px}.featured-track{min-height:445px}.more-section{padding-inline:40px}.work-grid{column-gap:30px;row-gap:64px}.more-card{max-width:210px}.more-name{font-size:15px}.more-meta{font-size:10px}.featured-section{padding-bottom:135px}}
 @media(max-width:600px){.featured-section{padding:75px 0 64px}.work-heading h2{font-size:40px}.work-heading>p{font-size:13px}.featured-gallery{--slide-width:min(76vw,300px);--slide-gap:32px;margin-top:25px}.featured-track{padding-top:21px;padding-bottom:48px;min-height:0}.featured-cover{border-radius:15px}.featured-caption{height:133px;padding-top:17px}.featured-name{font-size:14px;padding:8px 17px}.featured-category{font-size:10px}.featured-summary{font-size:9px;line-height:1.55;padding-inline:5px}.featured-controls{margin-top:0}.more-section{padding:10px 24px 85px}.work-grid{grid-template-columns:minmax(0,1fr);gap:47px;margin-top:46px;max-width:300px}.more-card,.more-card.last-pair-first,.more-card.last-pair-second,.more-card.last-single{grid-column:1;max-width:300px}.more-cover{border-radius:16px}.more-caption{padding-top:18px}.more-name{font-size:17px}.more-meta{font-size:12px;margin-top:7px}html[lang=zh-CN] .work-heading h2{font-size:34px}}
 @media(prefers-reduced-motion:reduce){.featured-cover{transform:none;will-change:auto}.featured-caption{transform:none}.more-card:hover .more-cover{transform:none}}
+@media(max-width:600px){:root{--square-card-radius:16px}.featured-cover,.more-cover{border-radius:var(--square-card-radius)}}
