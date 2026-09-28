@@ -38,6 +38,28 @@
     toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 2600);
   }
 
+  function hydrateMedia(container) {
+    if (!container) return;
+    $$('img[data-src]', container).forEach(image => {
+      image.src = image.dataset.src;
+      image.removeAttribute('data-src');
+    });
+    $$('video[data-poster]', container).forEach(video => {
+      video.poster = video.dataset.poster;
+      video.removeAttribute('data-poster');
+    });
+    const videos = new Set();
+    $$('source[data-src]', container).forEach(source => {
+      source.src = source.dataset.src;
+      source.removeAttribute('data-src');
+      if (source.parentElement instanceof HTMLVideoElement) videos.add(source.parentElement);
+    });
+    videos.forEach(video => {
+      video.load();
+      if (video.autoplay) video.play().catch(() => { /* Autoplay remains subject to browser policy. */ });
+    });
+  }
+
   $('#about-intro').textContent = content.aboutIntro;
   $('#about-body').textContent = content.aboutBody;
   $$('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
@@ -178,6 +200,13 @@
     $('#jinling-detail').hidden = !isJinling;
     $('#takeout-detail').hidden = !isTakeout;
     $('#oneleaf-detail').hidden = !isOneleaf;
+    const activeDetail = [
+      isTwinkle && $('#twinkle-detail'), isAmigo && $('#amigo-detail'), isTagi && $('#tagi-detail'),
+      isScat && $('#scat-detail'), isSummer && $('#summer-detail'), isCupshe && $('#cupshe-detail'),
+      isBmw && $('#bmw-detail'), isXiannv && $('#xiannv-detail'), isYan && $('#yan-detail'),
+      isJinling && $('#jinling-detail'), isTakeout && $('#takeout-detail'), isOneleaf && $('#oneleaf-detail'),
+    ].find(Boolean);
+    hydrateMedia(activeDetail);
     if (isTwinkle) {
       $('#twinkle-title').textContent = project.title;
       $$('[data-twinkle]').forEach(element => { element.textContent = window.SITE_LOCALES[language].twinkle[element.dataset.twinkle]; });
@@ -295,6 +324,7 @@
     }
     if (token !== routeVersion) return;
     if (projectId && nextPage === 'project') loadProject(projectId);
+    if (nextPage === 'about') hydrateMedia($('#about-page'));
     pages.forEach(page => {
       page.hidden = page.dataset.page !== nextPage;
       page.classList.remove('is-entering');

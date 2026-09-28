@@ -23,7 +23,7 @@ window.createWorkGallery = ({ content, localize }) => {
     link.dataset.project = project.id;
     link.draggable = false;
     link.style.setProperty('--project-color', project.color);
-    link.innerHTML = '<img class="featured-cover" src="' + project.cover + '" alt="" draggable="false"><div class="featured-caption"><h3 class="featured-name"></h3><p class="featured-category"></p><p class="featured-summary"></p></div>';
+    link.innerHTML = '<img class="featured-cover" data-src="' + project.cover + '" alt="" draggable="false" loading="lazy" decoding="async"><div class="featured-caption"><h3 class="featured-name"></h3><p class="featured-category"></p><p class="featured-summary"></p></div>';
     track.append(link);
     return link;
   });
@@ -35,10 +35,30 @@ window.createWorkGallery = ({ content, localize }) => {
     link.href = `#project/${project.id}`;
     link.dataset.project = project.id;
     link.style.setProperty('--project-color', project.color);
-    link.innerHTML = '<img class="more-cover" src="' + project.cover + '" alt="" draggable="false"><div class="more-caption"><h3 class="more-name"></h3><div class="more-meta"><span class="more-category"></span><time class="more-year"></time></div></div>';
+    link.innerHTML = '<img class="more-cover" data-src="' + project.cover + '" alt="" draggable="false" loading="lazy" decoding="async" fetchpriority="low"><div class="more-caption"><h3 class="more-name"></h3><div class="more-meta"><span class="more-category"></span><time class="more-year"></time></div></div>';
     grid.append(link);
     return link;
   });
+
+  function hydrateCards(cards) {
+    cards.forEach(card => {
+      const image = card.querySelector('img[data-src]');
+      if (!image) return;
+      image.src = image.dataset.src;
+      image.removeAttribute('data-src');
+    });
+  }
+  function loadNear(section, cards) {
+    if (!section || !('IntersectionObserver' in window)) { hydrateCards(cards); return; }
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      hydrateCards(cards);
+      observer.disconnect();
+    }, { rootMargin: '300px 0px' });
+    observer.observe(section);
+  }
+  loadNear(document.querySelector('#work'), featuredCards);
+  loadNear(document.querySelector('#more-work'), moreCards);
 
   const stride = () => featuredCards[0].offsetWidth + parseFloat(getComputedStyle(track).columnGap);
   const nearest = () => Math.max(0, Math.min(featured.length - 1, Math.round(track.scrollLeft / stride())));
