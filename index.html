@@ -12,12 +12,12 @@
     <link rel="icon" href="assets/avatar.png" type="image/png">
     <link rel="preload" href="assets/anton.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="assets/caveat.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="stylesheet" href="styles.css?v=20260928-2">
-    <link rel="stylesheet" href="work.css?v=20260928-2">
-    <script src="site-content.js?v=20260928-2" defer></script>
-    <script src="locales.js?v=20260928-2" defer></script>
-    <script src="work-gallery.js?v=20260928-2" defer></script>
-    <script src="app.js?v=20260928-2" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260929-1">
+    <link rel="stylesheet" href="work.css?v=20260929-1">
+    <script src="site-content.js?v=20260929-1" defer></script>
+    <script src="locales.js?v=20260929-1" defer></script>
+    <script src="work-gallery.js?v=20260929-1" defer></script>
+    <script src="app.js?v=20260929-1" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
@@ -88,6 +88,7 @@
             <p data-i18n="more.subtitle">There's more to explore.</p>
           </div>
           <div class="work-grid" id="more-work-grid"></div>
+          <p class="more-loading reveal" data-i18n="more.loading">More inspiration is on the way…</p>
         </section>
 
         <section class="contact-section" id="contact" aria-labelledby="contact-title">
@@ -96,7 +97,13 @@
             <h2 class="reveal" id="contact-title"><span class="title-lead" data-i18n="contact.title">Let's make</span><br><span data-i18n="contact.accent">something good.</span></h2>
             <div class="contact-bottom reveal">
               <p><span data-i18n="contact.line1">Good things start</span><br><span data-i18n="contact.line2">with a conversation.</span></p>
-              <div class="contact-details" data-contact-details></div>
+              <div class="contact-connect">
+                <div class="contact-details" data-contact-details></div>
+                <figure class="xiaohongshu-qr">
+                  <img src="assets/xiaohongshu-qr.jpg" alt="Zorya's Xiaohongshu QR code" data-i18n-alt="contact.xiaohongshuAlt" width="1200" height="1200" loading="lazy" decoding="async">
+                  <figcaption data-i18n="contact.xiaohongshu">Find me on Xiaohongshu</figcaption>
+                </figure>
+              </div>
             </div>
             <footer><a href="#home">Zorya Zhang</a><span data-i18n="footer.note">Made with care &amp; a little play.</span><span>&copy; <span data-year></span></span></footer>
           </div>
